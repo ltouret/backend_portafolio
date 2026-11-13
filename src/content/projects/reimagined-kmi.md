@@ -4,6 +4,7 @@ summary: A command-line pastebin in pure PHP, with no framework or database. Pip
 stack: [PHP, Docker, Bash]
 date: 2024-10-20
 repo: https://github.com/ltouret/reimagined-kmi
+url: https://kmi.ltouret.dev
 ---
 
 ## What it is
