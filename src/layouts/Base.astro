@@ -46,8 +46,11 @@ const path = Astro.url.pathname;
 
 		<footer class="site-footer">
 			<div class="wrap">
-				© {new Date().getFullYear()}
-				{site.name} · <a href={`mailto:${site.email}`}>{site.email}</a>
+				© {new Date().getFullYear()} {site.name} · <a href={`mailto:${site.email}`}>{site.email}</a>
+				<p class="made-with">
+					Made with <span role="img" aria-label="love">♥</span> and{' '}
+					<span role="img" aria-label="coffee">☕</span> in Paris
+				</p>
 			</div>
 		</footer>
 
