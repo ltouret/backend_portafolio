@@ -22,8 +22,9 @@ The infrastructure I run to host my own websites and services. It's spread over 
 - **Nginx as reverse proxy:** it routes each subdomain to the right container and handles TLS for all of them.
 - **Wildcard certificates:** acme.sh issues and renews one wildcard certificate that covers every subdomain.
 - **WireGuard VPN** for remote access to the network.
-- **fail2ban** watches the logs and bans IPs after repeated failed attempts.
+- **SSH with keys only**, no password login, and **fail2ban** watching the logs to ban IPs after repeated failed attempts.
 
-## Backups
+## Data safety
 
-Backups run every day and are copied to several machines, so a single machine failing doesn't lose any data.
+- **RAID:** the tower keeps persistent data on a RAID array, so a single disk failing doesn't lose anything.
+- **Daily backups,** copied to several machines, so a single machine failing doesn't lose any data.
