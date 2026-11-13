@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import { site } from '../site';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = site.tagline } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.role}`;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<title>{pageTitle}</title>
+		<!-- Apply a saved theme choice before first paint; no choice = follow the system. -->
+		<script is:inline>
+			try {
+				const t = localStorage.getItem('theme');
+				if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+			} catch {}
+		</script>
+	</head>
+	<body>
+		<header class="wrap site-header">
+			<a class="brand" href="/">{site.name}</a>
+			<nav aria-label="Main">
+				<a href="/projects/" aria-current={path.startsWith('/projects') ? 'page' : undefined}>
+					Projects
+				</a>
+				<button class="theme-toggle" type="button" id="theme-toggle" aria-label="Change theme">
+					theme: system
+				</button>
+			</nav>
+		</header>
+
+		<main class="wrap">
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				© {new Date().getFullYear()}
+				{site.name} · <a href={`mailto:${site.email}`}>{site.email}</a>
+			</div>
+		</footer>
+
+		<script is:inline>
+			(() => {
+				const btn = document.getElementById('theme-toggle');
+				const root = document.documentElement;
+				const order = ['system', 'light', 'dark'];
+				const current = () => root.dataset.theme || 'system';
+				const show = () => (btn.textContent = 'theme: ' + current());
+				btn.addEventListener('click', () => {
+					const next = order[(order.indexOf(current()) + 1) % order.length];
+					if (next === 'system') delete root.dataset.theme;
+					else root.dataset.theme = next;
+					try {
+						if (next === 'system') localStorage.removeItem('theme');
+						else localStorage.setItem('theme', next);
+					} catch {}
+					show();
+				});
+				show();
+			})();
+		</script>
+	</body>
+</html>

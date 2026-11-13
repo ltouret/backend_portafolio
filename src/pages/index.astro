@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getProjects } from '../lib/projects';
+import { site } from '../site';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured);
+---
+
+<Base>
+	<section class="hero">
+		<p class="role">{site.role}</p>
+		<h1>{site.name}</h1>
+		<p class="tagline">{site.tagline}</p>
+		<ul class="links">
+			{site.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+			<li><a href={`mailto:${site.email}`}>Email</a></li>
+		</ul>
+	</section>
+
+	<section aria-labelledby="featured-heading">
+		<div class="section-head">
+			<h2 id="featured-heading">Selected projects</h2>
+			<a href="/projects/">All projects ({projects.length}) →</a>
+		</div>
+		<ul class="project-list">
+			{featured.map((project) => <ProjectCard project={project} />)}
+		</ul>
+	</section>
+</Base>

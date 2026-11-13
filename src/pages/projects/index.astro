@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/projects';
+
+const projects = await getProjects();
+---
+
+<Base title="Projects" description="Everything I've built, newest first.">
+	<h1>Projects</h1>
+	<p class="muted">Everything I've built, newest first.</p>
+	<ul class="project-list">
+		{projects.map((project) => <ProjectCard project={project} />)}
+	</ul>
+</Base>

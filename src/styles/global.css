@@ -1,0 +1,266 @@
+/* Theme: follows the system by default; data-theme on <html> overrides it. */
+:root {
+	color-scheme: light dark;
+
+	--bg: light-dark(#fafaf8, #111315);
+	--surface: light-dark(#ffffff, #181b1e);
+	--text: light-dark(#1b1d1f, #e6e4df);
+	--muted: light-dark(#5f666d, #969ca3);
+	--border: light-dark(#e2e1dc, #2a2e33);
+	--accent: light-dark(#0b6e4f, #5fd0a5);
+
+	--sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--mono: ui-monospace, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+	--width: 44rem;
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--sans);
+	font-size: 1.0625rem;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+	max-width: var(--width);
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+
+a {
+	color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+a:hover {
+	text-decoration-thickness: 2px;
+}
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+h1 {
+	font-size: clamp(2rem, 6vw, 2.75rem);
+	margin: 0 0 0.75rem;
+}
+h2 {
+	font-size: 1.35rem;
+	margin: 0;
+}
+
+.muted {
+	color: var(--muted);
+}
+.mono {
+	font-family: var(--mono);
+	font-size: 0.85em;
+}
+
+/* Header */
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-block: 1.5rem;
+}
+.site-header .brand {
+	font-family: var(--mono);
+	font-size: 0.95rem;
+	color: var(--text);
+	text-decoration: none;
+}
+.site-header nav {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	font-size: 0.95rem;
+}
+.site-header nav a {
+	color: var(--muted);
+	text-decoration: none;
+}
+.site-header nav a:hover,
+.site-header nav a[aria-current='page'] {
+	color: var(--text);
+}
+.theme-toggle {
+	font: inherit;
+	font-family: var(--mono);
+	font-size: 0.8rem;
+	color: var(--muted);
+	background: none;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 0.25rem 0.6rem;
+	cursor: pointer;
+}
+.theme-toggle:hover {
+	color: var(--text);
+}
+
+/* Sections */
+main {
+	padding-block: 2.5rem 4rem;
+}
+.hero {
+	padding-block: 2rem 3.5rem;
+}
+.hero .role {
+	font-family: var(--mono);
+	font-size: 0.9rem;
+	color: var(--accent);
+	margin: 0 0 0.75rem;
+}
+.hero .tagline {
+	font-size: 1.2rem;
+	color: var(--muted);
+	max-width: 36rem;
+	margin: 0 0 1.5rem;
+}
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.section-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+.section-head a {
+	font-size: 0.95rem;
+	white-space: nowrap;
+}
+
+/* Project list */
+.project-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 0.75rem;
+}
+.project {
+	position: relative;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 1.1rem 1.25rem;
+	transition: border-color 0.15s;
+}
+.project:hover {
+	border-color: var(--accent);
+}
+.project h3 {
+	font-size: 1.1rem;
+	margin: 0 0 0.3rem;
+}
+.project h3 a {
+	color: var(--text);
+	text-decoration: none;
+}
+/* Make the whole card clickable through the title link. */
+.project h3 a::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+}
+.project p {
+	margin: 0 0 0.75rem;
+	color: var(--muted);
+}
+.project .meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem 1rem;
+}
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.tags li {
+	font-family: var(--mono);
+	font-size: 0.75rem;
+	color: var(--muted);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 0.05rem 0.6rem;
+}
+
+/* Project detail */
+.detail-head {
+	margin-bottom: 2rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border);
+}
+.detail-head .summary {
+	font-size: 1.15rem;
+	color: var(--muted);
+	margin: 0 0 1rem;
+}
+.detail-head .links {
+	margin-top: 1rem;
+}
+.prose h2 {
+	margin: 2rem 0 0.5rem;
+}
+.prose pre {
+	overflow-x: auto;
+	padding: 1rem;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	font-size: 0.85rem;
+}
+.prose code {
+	font-family: var(--mono);
+	font-size: 0.9em;
+}
+.prose img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+/* Footer */
+.site-footer {
+	border-top: 1px solid var(--border);
+	padding-block: 1.5rem 2.5rem;
+	font-size: 0.9rem;
+	color: var(--muted);
+}

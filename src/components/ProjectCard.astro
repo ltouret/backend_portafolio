@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, stack, date } = project.data;
+---
+
+<li class="project">
+	<h3><a href={`/projects/${project.id}/`}>{title}</a></h3>
+	<p>{summary}</p>
+	<div class="meta">
+		<ul class="tags" aria-label="Stack">
+			{stack.map((tech) => <li>{tech}</li>)}
+		</ul>
+		<time class="mono muted" datetime={date.toISOString()}>{date.getUTCFullYear()}</time>
+	</div>
+</li>
