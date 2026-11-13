@@ -37,5 +37,4 @@ Each project is one Markdown file in `src/content/projects/`. The schema is in `
 - **Body:** start with `## What it is`, then a few short `##` sections, such as the parts of the project or what went beyond the requirements. Keep it concise.
 - **Accuracy:** base everything on the project's README and code. Never invent features or numbers. If it was a team project, say so.
 - **Source:** locally, projects live in sibling folders (`../<name>`). Cloud and phone sessions don't have these, so work from the repo URL or from text the user pastes. If neither is available, ask.
-- **Placeholders:** `example-*.md` are template placeholders, to be replaced or deleted before launch.
 - **Check:** run `npx astro build` and make sure it passes before committing.
