@@ -1,23 +1,20 @@
 ---
 title: Avaj Launcher
-summary: An aircraft and weather simulation in Java, built around the Observer, Singleton and Factory design patterns.
+summary: A small aircraft and weather simulation in Java, designed from a UML class diagram around the Observer, Singleton and Factory patterns.
 stack: [Java, OOP, UML]
 date: 2026-04-06
 ---
 
 ## What it is
 
-A 42 school project in Java. The simulator reads a scenario file listing aircraft and the number of weather changes, runs the simulation, and writes every event to `simulation.txt`.
+A 42 school project, and an exercise in design more than in code. The subject hands you a UML class diagram, and the job is to implement it faithfully in Java. The program reads a scenario file listing aircraft and a number of weather changes, runs the simulation and writes every event to `simulation.txt`.
 
 ## Design
 
-- **Observer:** each aircraft registers with a `WeatherTower` and is notified when the weather changes.
-- **Singleton:** `WeatherProvider`, `AircraftFactory` and `Logger` each have a single instance.
-- **Factory:** `AircraftFactory` creates a `Balloon`, `JetPlane` or `Helicopter` from its type name.
-- A UML class diagram documents the structure.
+A `WeatherTower` is the subject of an Observer pattern. Each aircraft registers with it and is told when the weather changes. A balloon, a jet and a helicopter react differently to sun, rain, fog and snow, and an aircraft that reaches height 0 lands and unregisters itself.
 
-## Simulation
+Aircraft are never built directly. An `AircraftFactory` creates them from the type name in the scenario file. The factory, the weather provider and the logger are singletons.
 
-- Each aircraft type reacts to sun, rain, fog and snow in its own way, changing its coordinates and logging a message.
-- An aircraft that reaches height 0 lands and unregisters from the tower.
-- A parser validates the scenario file. Test scenarios cover valid and invalid input and height edge cases.
+## Input checking
+
+The parser rejects bad scenarios before the simulation starts. The repo has test scenarios for the valid and invalid cases, including heights at the edge of the allowed range.
